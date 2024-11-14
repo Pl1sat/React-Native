@@ -1,6 +1,6 @@
 import React from  "react";
 import {Text,Stylesheet, View} from "react-native";
-const MainScreen from './screenes/MainScreen';
+import MainScreen from './screenes/MainScreen';
 export default function  App() {
     return (
         <MainScreen/>
