@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import MenuScreen from "./screen/MenuScreen";
+import StudentScreen from "./componets/StudentScreen";
 // export default function App() {
 //   return (
    
@@ -9,7 +10,9 @@ import MenuScreen from "./screen/MenuScreen";
 // }
 
 const navigator = createStackNavigator({
-  Menu: MenuScreen
+  Menu: MenuScreen,
+  Students: StudentScreen
+
 },
 {
   intialRouteName: 'Menu',
@@ -26,4 +29,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-export default createAppContainer(navigator);
+export default StudentScreen;
