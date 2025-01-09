@@ -1,0 +1,52 @@
+[
+    {
+        "id":"1",
+        "name":"Disneyland",
+        "country":"France",
+        "description": "Disneyland is for kids and adults"
+    },
+    {
+        "id":"2",
+        "name":"Stonhange",
+        "country":"Ireland",
+        "description": "Stonehange is a place with rocks standing up"
+    },
+    {
+    "id":"3",
+    "name":"Bali",
+    "country":"Indonesia",
+    "description": "Bali is a place for tourism in south east asia"
+
+},
+{
+"id":"4",
+"name":"Gjakove",
+"country":"Kosove",
+"description": "Gjakova is a city in Kosovo"
+},
+{
+    "id":"5",
+    "name":"Prishtine",
+    "country":"Kosove",
+    "description": "Prishtina is the capital city Kosovo"
+    },
+    {
+        "id":"6",
+        "name":"Amsterdam",
+        "country":"Netherlands",
+        "description": "Amsterdam is a very clean city"
+    
+        },
+        {
+            "id":"7",
+            "name":"Athens",
+            "country":"Grecce",
+            "description": "Athens is a very old and historic city"
+            },
+            {
+                "id":"8",
+                "name":"Budapest",
+                "country":"Hungary",
+                "description": "Budapest is a very cool and crowded city "
+                }
+]
