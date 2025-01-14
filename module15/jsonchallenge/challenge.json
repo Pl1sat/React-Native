@@ -1,0 +1,85 @@
+{
+    "products": [
+        {
+            "id": "1",
+            "name": "Iphone 16",
+            "category": "Phone",
+            "price": "1200",
+            "description": "Apple's latest smartphone with powerful features.",
+            "stock": "300",
+            "image":"https://www.jumpplus.com/web/image/product.product/40358/image_1024/%5BMYWJ3VC-A%5D%20Apple%20iPhone%2016%20Pro%20Max%20%28Desert%20Titanium%2C%20256GB%29?unique=d17b9d0"
+
+        },
+        {
+            "id": "2",
+            "name": "Nike Hyperchase",
+            "category": "Shoes",
+            "price": "125",
+            "description": "Men's Basketball Shoes.",
+            "stock": "5",
+            "image":"https://www.nicekicks.com/files/2015/05/the-nike-hyperchase-voltwolf-grey-is-available-now-1.jpg"
+
+        },
+        {
+           "id": "3",
+            "name": "Samsung Galaxy S24",
+            "category": "Phone",
+            "price": "1100",
+            "description": "Samsung's flagship with a stunning AMOLED display.",
+            "stock": "200",
+            "image":"https://images.samsung.com/uk/smartphones/galaxy-s24/images/galaxy-s24-highlights-kv.jpg?imbypass=true"
+
+        },
+        {
+         "id": "4",
+            "name": "Adidas Ultraboost",
+            "category": "Shoes",
+            "price": "180",
+            "description": "High-performance running shoes with Boost cushioning.",
+            "stock": "8",
+            "image":"https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ba300702bce9426d95cc17953faa35df_9366/Ultraboost_5x_Shoes_Black_IH3110_HM1.jpg"   
+        },
+        {
+          "id": "5",
+            "name": "MacBook Pro ",
+            "category": "Lapotop",
+            "price": "2400",
+            "description": "Powerful MacBook with M1 Pro chip for professionals.",
+            "stock": "100",
+            "image": "https://www.apple.com/newsroom/images/product/mac/standard/Apple-MacBook-Pro-M2-Pro-and-M2-Max-hero-230117_Full-Bleed-Image.jpg.xlarge.jpg"  
+        },
+        {
+         "id": "6",
+            "name": "Sony WH-1000XM5",
+            "category": "Headphones",
+            "price": "400",
+            "description": "Noise-cancelling wireless headphones with superior sound.",
+            "stock": "12",
+            "image": "https://xtrasure.store/cdn/shop/files/Sony_WH-1000XM5_Wireless_Over-ear_Industry_Leading_Noise_Canceling_Headphones_with_Microphone.jpg?v=1721903658&width=800" 
+
+        },
+        {
+         "id": "7",
+            "name": "Dell XPS 13",
+            "category": "Laptop",
+            "price": "1300",
+            "description": "Compact ultrabook with InfinityEdge display.",
+            "stock": "20",
+            "image": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/9345/media-gallery/touch/gray/notebook-xps-13-9345-t-gray-gallery-2.psd?fmt=png-alpha&pscan=auto&scl=1&hei=402&wid=679&qlt=100,1&resMode=sharp2&size=679,402&chrss=full"   
+        },
+        {
+            "id": "8",
+            "name": "Apple Watch Series 8",
+            "category": "SmartWatch",
+            "price": "500",
+            "description": "Advanced health tracking and fitness features.",
+            "stock": "30",
+            "image":"https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111848_apple-watch-series8.png"   
+        }
+
+
+        
+
+    ]
+}
+
