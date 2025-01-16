@@ -1,0 +1,30 @@
+[
+    {
+        "id" : 1,
+        "name" : "Iphone X",
+        "category" : "Phone",
+        "price" : "$400",
+        "stock" : "Yes",
+        "image" : "https://static.toiimg.com/photo/61654288.cmsa",
+        "description": "Lorem ipsum dolor sit amet"
+    },
+    {
+        "id" : 2,
+        "name" : "Samsung S9",
+        "category" : "Phone",
+        "price" : "$300",
+        "stock" : "No",
+        "image" : "https://i5.walmartimages.com/asr/aff76b0f-0e1d-4a5f-ad2d-3b6cb5027588_1.d664ab57abb32827a0d03933cbda2c68.jpeg?odnWidth=612&odnHeight=612&odnBg=ffffff",
+        "description": "Lorem ipsum dolor sit amet"
+    },
+    {
+        "id" : 3,
+        "name" : "Samsung S10",
+        "category" : "Phone",
+        "price" : "$500",
+        "stock" : "Yes",
+        "image" : "https://images-na.ssl-images-amazon.com/images/I/618FTkMHQ3L._AC_SL1500_.jpg",
+        "description": "Lorem ipsum dolor sit amet"
+    }
+            
+]
