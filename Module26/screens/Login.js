@@ -1,13 +1,13 @@
-
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-const Login = () => {
+const Login = ({navigation}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleLogin = async () => {
         try {
+            console.log
             const response = await fetch("https://dummyjson.com/auth/login", {
                 method: "POST",
                 headers: { 'Content-Type': "application/json" },
@@ -20,8 +20,9 @@ const Login = () => {
 
             const data = await response.json();
             console.log(data);
-            if(data?.token){
+            if(data?.accessToken){
                 console.log("Next Page")
+                navigation.navigate("Main");
             }
         } catch (err) {
             console.error("Login failed:", err);
