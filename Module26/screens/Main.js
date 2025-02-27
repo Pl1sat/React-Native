@@ -1,11 +1,12 @@
-import React from 'react';
-import{View,Text} from "react-native"
-const Main=()=>{
-    return(
-        <View>
-            <Text>Welcome User!!!</Text>
-        </View>
+import react from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-    )
+const Main = ({ navigation }) => {
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Main</Text>
+        </View>
+    );
 }
+
 export default Main;
