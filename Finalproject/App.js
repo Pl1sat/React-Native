@@ -1,29 +1,19 @@
-
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import CryptoTracker from './screens/CryptoTracker';
-import CryptoDetail from './screens/CryptoDetail';
+import { View, Text, StyleSheet } from 'react-native';
 
-const Stack = createStackNavigator();
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>🚀 If you see this, React Native is working!</Text>
+    </View>
+  );
+}
 
-const App = () => {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen 
-                    name="Home" 
-                    component={CryptoTracker} 
-                    options={{ title: "Crypto Tracker" }} 
-                />
-                <Stack.Screen 
-                    name="Detail" 
-                    component={CryptoDetail} 
-                    options={{ title: "Crypto Details" }} 
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
-};
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#121212' },
+  text: { fontSize: 20, color: '#FFD700' },
+});
 
-export default App;
+
+
+
