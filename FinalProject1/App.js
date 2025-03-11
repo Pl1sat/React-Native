@@ -1,23 +1,18 @@
+
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { SafeAreaProvider } from "react-native-safe-area-context"; // Fix layout issues
+import Navigation from "./src/Navigation"; // Ensure this file exists
 
 export default function App() {
+  console.log("✅ App.js is running");
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>✅ App.js is Running</Text>
-    </View>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Navigation />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "red", // Ensure visibility
-  },
-  text: {
-    color: "white",
-    fontSize: 20,
-  },
-});
+
