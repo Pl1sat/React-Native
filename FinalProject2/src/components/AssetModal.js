@@ -1,12 +1,19 @@
-import { View, Text, Pressable, Modal, TextInput, ActivityIndicator } from 'react-native'
-import React, { useState ,Suspense } from 'react'
-import tw from "tailwind-react-native-classnames";
+import { View, Text, Pressable, Modal, TextInput, ActivityIndicator, Alert, StyleSheet } from 'react-native'
+import React, { useState, Suspense } from 'react'
 import SearchableDropDown from 'react-native-searchable-dropdown';
+
 const AssetModal = () => {
-     const [modalVisible, setModalVisible] = useState(false);
-     const [quantity, setQuantity] = useState();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [quantity, setQuantity] = useState('');
+
+  const LoadingFallback = () => (
+    <View style={styles.loadingContainer}>
+      <ActivityIndicator size="large" color="white" />
+    </View>
+  );
+
   return (
-    <Suspense fallback={<ActivityIndicator size="large" style={tw`mt-24`} />}>
+    <Suspense fallback={<LoadingFallback />}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -16,65 +23,49 @@ const AssetModal = () => {
           setModalVisible(!modalVisible);
         }}
       >
-        <View style={tw`flex mt-32 mx-3.5 `}>
-          <View style={tw` bg-white rounded-md p-2`}>
-            <View style={tw`my-4`}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalBody}>
               <SearchableDropDown
-                containerStyle={{ padding: 5, width: "100%" }}
-                itemStyle={{
-                  padding: 10,
-                  marginTop: 2,
-                  backgroundColor: "#FAF9F8",
-                  borderColor: "#bbb",
-                  borderWidth: 1,
-                  borderRadius: 5,
-                }}
-                itemTextStyle={{
-                  color: "#222",
-                }}
-                itemsContainerStyle={{ maxHeight: 140 }}
+                containerStyle={styles.dropdownContainer}
+                itemStyle={styles.dropdownItem}
+                itemTextStyle={styles.dropdownItemText}
+                itemsContainerStyle={styles.dropdownItemsContainer}
                 resetValue={false}
                 items={[]}
                 onItemSelect={(item) => console.log(item)}
                 textInputProps={{
                   placeholder: "Enter a coin",
                   underlineColorAndroid: "transparent",
-                  style: {
-                    padding: 12,
-                    borderWidth: 1,
-                    borderColor: "#ccc",
-                    borderRadius: 5,
-                    backgroundColor: "#FAF7F6",
-                  },
+                  style: styles.searchInput,
                 }}
               />
 
-              <View style={tw`mx-2.5 flex flex-row justify-center mt-4`}>
+              <View style={styles.quantityContainer}>
                 <TextInput
                   value={quantity}
                   placeholder="0"
-                  style={tw`text-black text-4xl`}
+                  style={styles.quantityInput}
                   keyboardType="numeric"
-                  onChangeText={() =>setQuantity()}
+                  onChangeText={(text) => setQuantity(text)}
                 />
-                <Text style={tw`text-black font-normal text-xs`}>BTC</Text>
+                <Text style={styles.currencyText}>BTC</Text>
               </View>
-              <Text style={tw`text-center text-gray-600 text-xs mb-10`}>
+              <Text style={styles.priceText}>
                 $3000 per coin
               </Text>
-              <Pressable style={tw`bg-indigo-500 rounded `}>
-                <Text
-                  style={tw`text-white p-2 text-center font-semibold text-base `}
-                >
+              <Pressable style={styles.addButton}>
+                <Text style={styles.addButtonText}>
                   Add Asset
                 </Text>
               </Pressable>
             </View>
 
-            <Pressable onPress={() => setModalVisible(!modalVisible)}>
-              <Text
-                style={tw`bg-red-700 text-center p-2 text-base font-semibold`}
-              >
+            <Pressable 
+              style={styles.closeButton}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.closeButtonText}>
                 Close
               </Text>
             </Pressable>
@@ -82,10 +73,10 @@ const AssetModal = () => {
         </View>
       </Modal>
       <Pressable
-        style={tw`bg-indigo-500 rounded `}
+        style={styles.addButton}
         onPress={() => setModalVisible(!modalVisible)}
       >
-        <Text style={tw`text-white p-2 text-center font-semibold text-base `}>
+        <Text style={styles.addButtonText}>
           Add New Asset
         </Text>
       </Pressable>
@@ -93,4 +84,91 @@ const AssetModal = () => {
   );
 }
 
-export default AssetModal
+const styles = StyleSheet.create({
+  loadingContainer: {
+    marginTop: 96,
+    alignItems: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    marginTop: 128,
+    marginHorizontal: 14,
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    borderRadius: 6,
+    padding: 8,
+  },
+  modalBody: {
+    marginVertical: 16,
+  },
+  dropdownContainer: { 
+    padding: 5, 
+    width: "100%" 
+  },
+  dropdownItem: {
+    padding: 10,
+    marginTop: 2,
+    backgroundColor: "#FAF9F8",
+    borderColor: "#bbb",
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  dropdownItemText: {
+    color: "#222",
+  },
+  dropdownItemsContainer: { 
+    maxHeight: 140 
+  },
+  searchInput: {
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    backgroundColor: "#FAF7F6",
+  },
+  quantityContainer: {
+    marginHorizontal: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 16,
+  },
+  quantityInput: {
+    color: 'black',
+    fontSize: 36,
+  },
+  currencyText: {
+    color: 'black',
+    fontWeight: 'normal',
+    fontSize: 12,
+  },
+  priceText: {
+    textAlign: 'center',
+    color: '#4b5563',
+    fontSize: 12,
+    marginBottom: 40,
+  },
+  addButton: {
+    backgroundColor: '#6366f1',
+    borderRadius: 4,
+  },
+  addButtonText: {
+    color: 'white',
+    padding: 8,
+    textAlign: 'center',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  closeButton: {
+    backgroundColor: '#dc2626',
+  },
+  closeButtonText: {
+    color: 'white',
+    textAlign: 'center',
+    padding: 8,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});
+
+export default AssetModal;

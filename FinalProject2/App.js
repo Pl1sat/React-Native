@@ -1,13 +1,21 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View, LogBox } from "react-native";
 import { Navigation } from "./src/Navigation";
 import ListContextProvider from "./src/Context";
 import { RecoilRoot } from "recoil";
 
+LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
+
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={{
+        colors: {
+          background: "#121212",
+        },
+      }}
+    >
       <ListContextProvider>
         <RecoilRoot>
           <View style={styles.container}>

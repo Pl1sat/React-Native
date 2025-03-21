@@ -1,97 +1,134 @@
-import React, { useEffect, useState } from "react";
-import { SafeAreaView, View, Text, FlatList, ActivityIndicator, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, FlatList, RefreshControl, ActivityIndicator, Text, StyleSheet, SafeAreaView } from "react-native";
+import React, { useState, useEffect } from "react";
+import Coin from "../components/Coin";
 import { getMarketData } from "../Request";
 
-export default function HomeScreen({ navigation }) {
+const ErrorComponent = ({ message, onRetry }) => (
+  <View style={styles.errorContainer}>
+    <Text style={styles.errorText}>{message}</Text>
+    <Text style={styles.retryButton} onPress={onRetry}>
+      Tap to retry
+    </Text>
+  </View>
+);
+
+export default function Home() {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const getData = async () => {
+    try {
+      console.log('Fetching market data...');
+      setLoading(true);
+      setError(null);
+      const coinData = await getMarketData();
+      console.log('Received data:', coinData ? 'Data exists' : 'No data');
+      if (!coinData) {
+        throw new Error("Failed to fetch cryptocurrency data");
+      }
+      setData(coinData);
+    } catch (err) {
+      console.error('Error in getData:', err.message);
+      setError(err.message || "An unexpected error occurred");
+      setData([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const marketData = await getMarketData();
-      if (marketData) {
-        setData(marketData);
-      }
-      setLoading(false);
-    };
-    fetchData();
+    console.log('HomeScreen mounted');
+    getData();
   }, []);
 
-  if (loading) {
-    return (
-      <View style={styles.loaderContainer}>
-        <ActivityIndicator size="large" color="#fff" />
-      </View>
-    );
-  }
+  console.log('Rendering HomeScreen:', { loading, error, dataLength: data.length });
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => navigation.navigate("CoinDetails", { coin: item })}>
-            <View style={styles.item}>
-              <Image source={{ uri: item.image }} style={styles.icon} />
-              <View style={styles.info}>
-                <Text style={styles.text}>{item.name}</Text>
-                <Text style={styles.price}>${item.current_price.toFixed(2)}</Text>
-              </View>
-              <Text style={[styles.change, item.price_change_percentage_24h >= 0 ? styles.positive : styles.negative]}>
-                {item.price_change_percentage_24h.toFixed(2)}%
-              </Text>
-            </View>
-          </TouchableOpacity>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        {error ? (
+          <ErrorComponent message={error} onRetry={getData} />
+        ) : loading && data.length === 0 ? (
+          <View style={styles.centerContainer}>
+            <ActivityIndicator size="large" color="white" />
+            <Text style={styles.loadingText}>Loading cryptocurrencies...</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={data}
+            renderItem={({ item }) => {
+              console.log('Rendering coin:', item.name);
+              return <Coin marketCoin={item} />;
+            }}
+            keyExtractor={(item) => item.id}
+            refreshControl={
+              <RefreshControl
+                refreshing={loading}
+                onRefresh={getData}
+                tintColor="white"
+              />
+            }
+            ListEmptyComponent={
+              !loading && (
+                <View style={styles.centerContainer}>
+                  <Text style={styles.emptyText}>No cryptocurrencies found</Text>
+                </View>
+              )
+            }
+            contentContainerStyle={styles.flatListContent}
+          />
         )}
-      />
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#121212',
+  },
   container: {
     flex: 1,
-    backgroundColor: "#121212",
+    backgroundColor: '#121212',
   },
-  loaderContainer: {
+  flatListContent: {
+    flexGrow: 1,
+    backgroundColor: '#121212',
+  },
+  centerContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#121212",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#121212',
   },
-  item: {
-    flexDirection: "row",
-    padding: 15,
-    marginVertical: 10,
-    backgroundColor: "#222",
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  icon: {
-    width: 40,
-    height: 40,
-    marginRight: 10,
-  },
-  info: {
+  errorContainer: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#121212',
+    padding: 20,
   },
-  text: {
-    color: "white",
-    fontSize: 18,
-  },
-  price: {
-    color: "gray",
-  },
-  change: {
+  errorText: {
+    color: '#ff6b6b',
     fontSize: 16,
-    fontWeight: "bold",
+    textAlign: 'center',
+    marginBottom: 12,
   },
-  positive: {
-    color: "#4CAF50",
+  retryButton: {
+    color: '#4dabf7',
+    fontSize: 16,
+    textDecorationLine: 'underline',
   },
-  negative: {
-    color: "#F44336",
+  loadingText: {
+    color: 'white',
+    marginTop: 12,
+    fontSize: 14,
+  },
+  emptyText: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });

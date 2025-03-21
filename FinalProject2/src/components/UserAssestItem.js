@@ -1,33 +1,93 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
-import tw from "tailwind-react-native-classnames";
 import { AntDesign } from "@expo/vector-icons";
 
-const UserAssestItem = () => {
+const UserAssestItem = ({ asset }) => {
+  const { name, symbol, currentPrice, priceChangePercentage, holdings, image } = asset;
+
   return (
-    <View style={tw`flex flex-row my-4 mx-2.5`}>
-      <Image source={{ uri: "" }} style={tw`h-10 w-10`} />
-      <View>
-        <Text style={tw`text-white text-xs font-bold`}>Bitcoin</Text>
-        <Text style={tw`text-gray-500 text-xs`}>BTC</Text>
+    <View style={styles.container}>
+      <Image source={{ uri: image }} style={styles.image} />
+      <View style={styles.nameContainer}>
+        <Text style={styles.nameText}>{name}</Text>
+        <Text style={styles.symbolText}>{symbol.toUpperCase()}</Text>
       </View>
-      <View style={tw`ml-auto`}>
-        <Text style={tw`text-white`}>$1980</Text>
-        <View style={tw`flex flex-row items-center`}>
+      <View style={styles.priceContainer}>
+        <Text style={styles.priceText}>${currentPrice}</Text>
+        <View style={styles.percentageContainer}>
           <AntDesign
-            name="caretup"
+            name={priceChangePercentage >= 0 ? "caretup" : "caretdown"}
             size={14}
-            style={tw`text-green-500 mr-0.5`}
+            color={priceChangePercentage >= 0 ? "#34d399" : "#dc2626"}
+            style={styles.icon}
           />
-          <Text style={tw`text-green-500`}>0.80%</Text>
+          <Text style={[
+            styles.percentageText,
+            { color: priceChangePercentage >= 0 ? "#34d399" : "#dc2626" }
+          ]}>
+            {priceChangePercentage.toFixed(2)}%
+          </Text>
         </View>
       </View>
-      <View style={tw`ml-auto flex items-end`}>
-        <Text style={tw`text-white text-xs font-bold`}>$56789</Text>
-        <Text style={tw`text-gray-500 text-xs`}>1BTC</Text>
+      <View style={styles.holdingsContainer}>
+        <Text style={styles.holdingsValueText}>${(currentPrice * holdings).toFixed(2)}</Text>
+        <Text style={styles.holdingsQuantityText}>{holdings} {symbol.toUpperCase()}</Text>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    marginVertical: 16,
+    marginHorizontal: 10,
+  },
+  image: {
+    height: 40,
+    width: 40,
+  },
+  nameContainer: {
+    marginLeft: 8,
+  },
+  nameText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  symbolText: {
+    color: '#6b7280',
+    fontSize: 12,
+  },
+  priceContainer: {
+    marginLeft: 'auto',
+  },
+  priceText: {
+    color: 'white',
+  },
+  percentageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    marginRight: 2,
+  },
+  percentageText: {
+    fontSize: 12,
+  },
+  holdingsContainer: {
+    marginLeft: 'auto',
+    alignItems: 'flex-end',
+  },
+  holdingsValueText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  holdingsQuantityText: {
+    color: '#6b7280',
+    fontSize: 12,
+  },
+});
 
 export default UserAssestItem;

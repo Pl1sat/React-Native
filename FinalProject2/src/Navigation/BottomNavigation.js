@@ -5,8 +5,9 @@ import { FontAwesome, Fontisto } from "@expo/vector-icons";
 import WatchListScreen from "../screens/WatchListScreen";
 import UserScreen from "../screens/UserScreen";
 
+const Tab = createBottomTabNavigator();
+
 export const BottomNavigation = () => {
-  const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
       initialRouteName="Home"

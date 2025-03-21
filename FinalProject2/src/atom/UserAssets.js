@@ -1,13 +1,14 @@
 import { atom, selector } from "recoil";
 
-export const userAsset = atom({
-  key: "userAsset",
-  default: allUserAssets,
-});
-
 export const allUserAssets = selector({
   key: "allUserAssets",
   get: async () => {
-      return [{id: 'bitcoin'}]
+    // Fetch or compute the user assets here
+    return [{ id: 'bitcoin' }];
   },
+});
+
+export const userAsset = atom({
+  key: "userAsset",
+  default: allUserAssets,
 });

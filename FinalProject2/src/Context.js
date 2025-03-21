@@ -11,7 +11,7 @@ const ListContextProvider = ({ children }) => {
       const jsonValue = await AsyncStorage.getItem("@listData_key");
       setListData(jsonValue != null ? JSON.parse(jsonValue) : []);
     } catch (error) {
-      console.error("Error fetching watchlist:", error);
+      console.log(error);
     }
   };
 
@@ -22,7 +22,7 @@ const ListContextProvider = ({ children }) => {
       await AsyncStorage.setItem("@listData_key", jsonValue);
       setListData(newListData);
     } catch (error) {
-      console.error("Error saving coin:", error);
+      console.log(error);
     }
   };
 
@@ -31,11 +31,12 @@ const ListContextProvider = ({ children }) => {
       const newListData = listData.filter(
         (coinIdValue) => coinIdValue !== coinId
       );
+
       const jsonValue = JSON.stringify(newListData);
       await AsyncStorage.setItem("@listData_key", jsonValue);
       setListData(newListData);
     } catch (error) {
-      console.error("Error removing coin:", error);
+      console.log(error);
     }
   };
 
@@ -44,7 +45,9 @@ const ListContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <ListContext.Provider value={{ listData, getStoreCoinId, removeStoreCoinId }}>
+    <ListContext.Provider
+      value={{ listData, getStoreCoinId, removeStoreCoinId }}
+    >
       {children}
     </ListContext.Provider>
   );
