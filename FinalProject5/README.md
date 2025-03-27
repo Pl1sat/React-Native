@@ -1,1 +1,1 @@
-My react native folder
+Cryptocurrency app ( looks like Binance)
