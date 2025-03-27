@@ -38,9 +38,13 @@ const CoinInfo = ({ coin }) => {
   const classes = useStyles();
 
   const fetchHistoricData = useCallback(async () => {
-    const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
-    setFlag(true);
-    setHistoricData(data.prices);
+    try {
+      const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
+      setFlag(true);
+      setHistoricData(data.prices);
+    } catch (error) {
+      console.error('Error fetching historical data:', error);
+    }
   }, [coin.id, days, currency]);
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, Typography, makeStyles, Grid, Container, Avatar } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { fetchCoinDetails } from '../services/coinService';
+import HomeButton from './HomeButton'; // Import HomeButton
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,6 +83,7 @@ const FavoritesList = () => {
       <Typography variant="h4" align="center" gutterBottom>
         My Favorites
       </Typography>
+      <HomeButton /> {/* Add HomeButton here */}
       {favorites.length > 0 ? (
         <Grid container spacing={3}>
           {favorites.map(coinId => (
